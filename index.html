@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>QUEST Nawabshah - Entry Test 2025</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --navy: #0a1628;
+    --blue: #1a3a6b;
+    --gold: #c9a84c;
+    --gold-light: #f0d080;
+    --cream: #fdf6e3;
+    --white: #ffffff;
+    --red: #c0392b;
+    --green: #1a7a4a;
+    --gray: #e8e0d0;
+    --text: #1a1a2e;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, #0a1628 0%, #1a3a6b 60%, #0d2244 100%);
+    border-bottom: 3px solid var(--gold);
+    padding: 20px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.5);
+  }
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .logo-circle {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 900;
+    color: var(--navy);
+    flex-shrink: 0;
+  }
+
+  .header-title h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 900;
+    color: var(--gold);
+    letter-spacing: 1px;
+  }
+
+  .header-title p {
+    font-size: 11px;
+    color: #aab8d0;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .timer-box {
+    background: rgba(201,168,76,0.15);
+    border: 1.5px solid var(--gold);
+    border-radius: 10px;
+    padding: 8px 20px;
+    text-align: center;
+  }
+
+  .timer-label { font-size: 10px; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; }
+  .timer-value { font-family: 'Playfair Display', serif; font-size: 26px; color: var(--white); font-weight: 700; }
+
+  /* PROGRESS BAR */
+  .progress-wrap {
+    background: #0d1e3a;
+    padding: 12px 40px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .progress-track {
+    flex: 1;
+    height: 6px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    border-radius: 10px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+
+  .progress-text {
+    font-size: 12px;
+    color: var(--gold);
+    white-space: nowrap;
+    min-width: 80px;
+    text-align: right;
+  }
+
+  /* TABS */
+  .tabs {
+    display: flex;
+    background: #0d1e3a;
+    padding: 0 40px;
+    gap: 0;
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+  }
+
+  .tab-btn {
+    padding: 14px 28px;
+    background: none;
+    border: none;
+    color: #7a8faa;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s;
+    position: relative;
+  }
+
+  .tab-btn:hover { color: var(--gold-light); }
+
+  .tab-btn.active {
+    color: var(--gold);
+    border-bottom: 3px solid var(--gold);
+  }
+
+  .tab-badge {
+    display: inline-block;
+    background: rgba(201,168,76,0.2);
+    color: var(--gold);
+    border-radius: 10px;
+    font-size: 10px;
+    padding: 1px 7px;
+    margin-left: 6px;
+  }
+
+  .tab-btn.complete .tab-badge {
+    background: rgba(26,122,74,0.3);
+    color: #4cdb8a;
+  }
+
+  /* MAIN */
+  .main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 36px 24px 120px;
+  }
+
+  /* SECTION HEADER */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 30px;
+  }
+
+  .section-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 900;
+  }
+
+  .section-icon.math { background: linear-gradient(135deg, #1a5c35, #27ae60); }
+  .section-icon.eng { background: linear-gradient(135deg, #1a3a6b, #2980b9); }
+  .section-icon.phy { background: linear-gradient(135deg, #5c1a1a, #c0392b); }
+  .section-icon.chem { background: linear-gradient(135deg, #5c4a1a, #d4860a); }
+
+  .section-info h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: var(--gold);
+  }
+
+  .section-info p { font-size: 12px; color: #8899aa; margin-top: 2px; }
+
+  /* QUESTION CARD */
+  .q-card {
+    background: linear-gradient(145deg, #0f2040, #122548);
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 16px;
+    padding: 24px 28px;
+    margin-bottom: 18px;
+    transition: border-color 0.3s;
+  }
+
+  .q-card:hover { border-color: rgba(201,168,76,0.35); }
+
+  .q-num {
+    font-size: 10px;
+    color: var(--gold);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .q-text {
+    font-size: 16px;
+    color: var(--white);
+    font-weight: 500;
+    line-height: 1.6;
+    margin-bottom: 18px;
+  }
+
+  .options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  @media(max-width:600px) { .options { grid-template-columns: 1fr; } }
+
+  .opt-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    background: rgba(255,255,255,0.04);
+    border: 1.5px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 14px;
+    color: #c8d8e8;
+  }
+
+  .opt-label:hover {
+    background: rgba(201,168,76,0.1);
+    border-color: rgba(201,168,76,0.4);
+    color: var(--white);
+  }
+
+  .opt-label input[type="radio"] { display: none; }
+
+  .opt-label.selected {
+    background: rgba(201,168,76,0.18);
+    border-color: var(--gold);
+    color: var(--gold-light);
+  }
+
+  .opt-dot {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.2);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+
+  .opt-label.selected .opt-dot {
+    border-color: var(--gold);
+    background: var(--gold);
+  }
+
+  .opt-dot-inner {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--navy);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .opt-label.selected .opt-dot-inner { opacity: 1; }
+
+  /* BOTTOM NAV */
+  .bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(0deg, #080f1e 70%, transparent);
+    padding: 16px 40px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 99;
+  }
+
+  .nav-btn {
+    padding: 12px 28px;
+    border-radius: 10px;
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    transition: all 0.2s;
+  }
+
+  .btn-prev {
+    background: rgba(255,255,255,0.07);
+    color: #aab8cc;
+    border: 1.5px solid rgba(255,255,255,0.12);
+  }
+
+  .btn-prev:hover { background: rgba(255,255,255,0.12); color: var(--white); }
+
+  .btn-next {
+    background: linear-gradient(135deg, var(--gold), #b8922a);
+    color: var(--navy);
+    font-weight: 700;
+  }
+
+  .btn-next:hover { background: linear-gradient(135deg, var(--gold-light), var(--gold)); transform: translateY(-1px); }
+
+  .btn-finish {
+    background: linear-gradient(135deg, #1a7a4a, #0f5c32);
+    color: var(--white);
+    font-weight: 700;
+    border: 2px solid #2ecc71;
+    animation: pulse-green 2s infinite;
+  }
+
+  @keyframes pulse-green {
+    0%,100% { box-shadow: 0 0 0 0 rgba(46,204,113,0.3); }
+    50% { box-shadow: 0 0 0 8px rgba(46,204,113,0); }
+  }
+
+  /* RESULT SCREEN */
+  #result-screen {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: var(--navy);
+    z-index: 200;
+    overflow-y: auto;
+  }
+
+  .result-inner {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 50px 24px 80px;
+  }
+
+  .result-header {
+    text-align: center;
+    margin-bottom: 44px;
+  }
+
+  .result-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    color: var(--gold);
+    line-height: 1.2;
+  }
+
+  .result-header p { color: #8899aa; margin-top: 10px; font-size: 15px; }
+
+  .score-circle-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 44px;
+  }
+
+  .score-circle {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: conic-gradient(var(--gold) 0deg, rgba(201,168,76,0.1) 0deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .score-circle::before {
+    content: '';
+    position: absolute;
+    inset: 10px;
+    border-radius: 50%;
+    background: var(--navy);
+  }
+
+  .score-inner {
+    position: relative;
+    text-align: center;
+    z-index: 1;
+  }
+
+  .score-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 44px;
+    font-weight: 900;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .score-total { font-size: 14px; color: #8899aa; }
+
+  .subject-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  @media(max-width:520px) { .subject-cards { grid-template-columns: 1fr; } }
+
+  .subj-card {
+    background: linear-gradient(145deg, #0f2040, #122548);
+    border-radius: 14px;
+    padding: 22px 24px;
+    border-left: 4px solid var(--gold);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .subj-card::after {
+    content: attr(data-letter);
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Playfair Display', serif;
+    font-size: 64px;
+    font-weight: 900;
+    opacity: 0.06;
+    color: var(--white);
+  }
+
+  .subj-card.math { border-left-color: #27ae60; }
+  .subj-card.eng { border-left-color: #2980b9; }
+  .subj-card.phy { border-left-color: #c0392b; }
+  .subj-card.chem { border-left-color: #d4860a; }
+
+  .subj-name { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #8899aa; }
+  .subj-score { font-family: 'Playfair Display', serif; font-size: 34px; color: var(--white); font-weight: 700; }
+  .subj-bar { height: 4px; background: rgba(255,255,255,0.08); border-radius: 4px; margin-top: 10px; overflow: hidden; }
+  .subj-bar-fill { height: 100%; border-radius: 4px; transition: width 1.2s cubic-bezier(.4,0,.2,1); }
+
+  .verdict-box {
+    background: linear-gradient(135deg, rgba(201,168,76,0.12), rgba(201,168,76,0.04));
+    border: 1.5px solid rgba(201,168,76,0.3);
+    border-radius: 14px;
+    padding: 24px 28px;
+    text-align: center;
+    margin-bottom: 28px;
+  }
+
+  .verdict-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+
+  .verdict-msg { color: #b0c0d0; font-size: 14px; line-height: 1.6; }
+
+  .restart-btn {
+    display: block;
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, var(--gold), #b8922a);
+    color: var(--navy);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: all 0.2s;
+  }
+
+  .restart-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,168,76,0.4); }
+
+  /* SECTION hidden */
+  .section-content { display: none; }
+  .section-content.active { display: block; }
+
+  /* Answered indicator */
+  .q-card.answered { border-left: 3px solid var(--gold); }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-left">
+    <div class="logo-circle">Q</div>
+    <div class="header-title">
+      <h1>QUEST Nawabshah
+        
+      </h1>
+      <h1>(Mudasir Shar)</h1>
+      <p>Entry Test 2026 &mdash; Mock Examination</p>
+      
+    </div>
+  </div>
+  <div class="timer-box">
+    <div class="timer-label">Time Left</div>
+    <div class="timer-value" id="timer">90:00</div>
+  </div>
+</div>
+
+<!-- PROGRESS -->
+<div class="progress-wrap">
+  <div class="progress-track">
+    <div class="progress-fill" id="progress-fill"></div>
+  </div>
+  <div class="progress-text" id="progress-text">0 / 100 Answered</div>
+</div>
+
+<!-- TABS -->
+<div class="tabs">
+  <button class="tab-btn active" onclick="switchSection(0)" id="tab-0">Mathematics <span class="tab-badge" id="badge-0">0/25</span></button>
+  <button class="tab-btn" onclick="switchSection(1)" id="tab-1">English <span class="tab-badge" id="badge-1">0/25</span></button>
+  <button class="tab-btn" onclick="switchSection(2)" id="tab-2">Physics <span class="tab-badge" id="badge-2">0/25</span></button>
+  <button class="tab-btn" onclick="switchSection(3)" id="tab-3">Chemistry <span class="tab-badge" id="badge-3">0/25</span></button>
+</div>
+
+<!-- MAIN -->
+<div class="main" id="main-content">
+
+  <!-- BIOLOGY -->
+  <div class="section-content active" id="section-0">
+    <div class="section-header">
+      <div class="section-icon math">B</div>
+      <div class="section-info">
+        <h2>Mathematics</h2>
+        <p>25 Multiple Choice Questions &mdash; 1 Mark Each</p>
+      </div>
+    </div>
+    <div id="questions-0"></div>
+  </div>
+
+  <!-- ENGLISH -->
+  <div class="section-content" id="section-1">
+    <div class="section-header">
+      <div class="section-icon eng">E</div>
+      <div class="section-info">
+        <h2>English</h2>
+        <p>25 Multiple Choice Questions &mdash; 1 Mark Each</p>
+      </div>
+    </div>
+    <div id="questions-1"></div>
+  </div>
+
+  <!-- PHYSICS -->
+  <div class="section-content" id="section-2">
+    <div class="section-header">
+      <div class="section-icon phy">P</div>
+      <div class="section-info">
+        <h2>Physics</h2>
+        <p>25 Multiple Choice Questions &mdash; 1 Mark Each</p>
+      </div>
+    </div>
+    <div id="questions-2"></div>
+  </div>
+
+  <!-- CHEMISTRY -->
+  <div class="section-content" id="section-3">
+    <div class="section-header">
+      <div class="section-icon chem">C</div>
+      <div class="section-info">
+        <h2>Chemistry</h2>
+        <p>25 Multiple Choice Questions &mdash; 1 Mark Each</p>
+      </div>
+    </div>
+    <div id="questions-3"></div>
+  </div>
+
+</div>
+
+<!-- BOTTOM NAV -->
+<div class="bottom-nav">
+  <button class="nav-btn btn-prev" onclick="prevSection()">Previous Section</button>
+  <button class="nav-btn btn-next" id="main-btn" onclick="nextOrFinish()">Next Section</button>
+</div>
+
+<!-- RESULT SCREEN -->
+<div id="result-screen">
+  <div class="result-inner">
+    <div class="result-header">
+      <h1>Test Complete</h1>
+      <p>QUEST Nawabshah Entry Test 2025 &mdash; Your Result</p>
+    </div>
+
+    <div class="score-circle-wrap">
+      <div class="score-circle" id="score-circle">
+        <div class="score-inner">
+          <div class="score-num" id="total-score">0</div>
+          <div class="score-total">out of 100</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="subject-cards">
+      <div class="subj-card math" data-letter="B">
+        <div class="subj-name">Mathematics</div>
+        <div class="subj-score" id="math-score">0 / 25</div>
+        <div class="subj-bar"><div class="subj-bar-fill" id="math-bar" style="width:0%;background:#27ae60"></div></div>
+      </div>
+      <div class="subj-card eng" data-letter="E">
+        <div class="subj-name">English</div>
+        <div class="subj-score" id="eng-score">0 / 25</div>
+        <div class="subj-bar"><div class="subj-bar-fill" id="eng-bar" style="width:0%;background:#2980b9"></div></div>
+      </div>
+      <div class="subj-card phy" data-letter="P">
+        <div class="subj-name">Physics</div>
+        <div class="subj-score" id="phy-score">0 / 25</div>
+        <div class="subj-bar"><div class="subj-bar-fill" id="phy-bar" style="width:0%;background:#c0392b"></div></div>
+      </div>
+      <div class="subj-card chem" data-letter="C">
+        <div class="subj-name">Chemistry</div>
+        <div class="subj-score" id="chem-score">0 / 25</div>
+        <div class="subj-bar"><div class="subj-bar-fill" id="chem-bar" style="width:0%;background:#d4860a"></div></div>
+      </div>
+    </div>
+
+    <div class="verdict-box" id="verdict-box">
+      <div class="verdict-title" id="verdict-title">Calculating...</div>
+      <div class="verdict-msg" id="verdict-msg"></div>
+    </div>
+
+    <button class="restart-btn" onclick="restartTest()">Restart Test</button>
+  </div>
+</div>
+
+<script>
+// ===================== ALL QUESTIONS =====================
+const allQuestions = {
+  
+  0: [ // MATHEMATICS
+    { q:"What is the value of 7 × 8?", opts:["54","56","64","48"], ans:1 },
+    { q:"Solve: 15 + 27 =", opts:["32","42","52","44"], ans:1 },
+    { q:"What is the square root of 144?", opts:["10","11","12","14"], ans:2 },
+    { q:"If x + 5 = 12, then x =", opts:["5","6","7","8"], ans:2 },
+    { q:"What is 25% of 200?", opts:["25","40","50","60"], ans:2 },
+    { q:"The value of π is approximately:", opts:["2.14","3.14","4.13","3.41"], ans:1 },
+    { q:"What is the area of a rectangle with length 8 and width 5?", opts:["13","26","40","45"], ans:2 },
+    { q:"Solve: 9² =", opts:["18","72","81","99"], ans:2 },
+    { q:"What is the cube of 3?", opts:["6","9","18","27"], ans:3 },
+    { q:"If a triangle has angles 90°, 45°, then the third angle is:", opts:["35°","45°","55°","65°"], ans:1 },
+    { q:"Simplify: 5x + 3x =", opts:["8","8x","15x","5x³"], ans:1 },
+    { q:"What is the perimeter of a square with side 6?", opts:["12","18","24","36"], ans:2 },
+    { q:"Solve: 100 ÷ 4 =", opts:["20","25","30","40"], ans:1 },
+    { q:"The formula for the area of a circle is:", opts:["2πr","πr²","πd","r²"], ans:1 },
+    { q:"What is the HCF of 12 and 18?", opts:["2","3","6","9"], ans:2 },
+    { q:"Convert 0.75 into percentage:", opts:["7.5%","75%","57%","750%"], ans:1 },
+    { q:"If y = 3x and x = 4, then y =", opts:["7","10","12","14"], ans:2 },
+    { q:"What is the value of 2³?", opts:["4","6","8","16"], ans:2 },
+    { q:"The sum of interior angles of a triangle is:", opts:["90°","180°","270°","360°"], ans:1 },
+    { q:"Solve: 45 - 19 =", opts:["24","25","26","27"], ans:2 },
+    { q:"What is the mean of 2, 4, 6, 8?", opts:["4","5","6","7"], ans:1 },
+    { q:"What is 10% of 500?", opts:["25","40","50","60"], ans:2 },
+    { q:"Find the next number: 2, 4, 8, 16, ?", opts:["18","24","30","32"], ans:3 },
+    { q:"What is the value of 11 × 11?", opts:["111","121","131","141"], ans:1 },
+    { q:"A straight angle is equal to:", opts:["45°","90°","180°","360°"], ans:2 }
+  ],
+
+  1: [ // ENGLISH
+    { q:"Choose the correct sentence:", opts:["She go to school.","She goes to school.","She gone to school.","She going to school."], ans:1 },
+    { q:"The synonym of 'abundant' is:", opts:["Scarce","Plentiful","Empty","Rare"], ans:1 },
+    { q:"Identify the correct form: 'He ___ to the market yesterday.'", opts:["goes","go","went","going"], ans:2 },
+    { q:"An 'antonym' is a word that has:", opts:["Same meaning","Similar spelling","Opposite meaning","Similar sound"], ans:2 },
+    { q:"Which sentence uses the passive voice?", opts:["She wrote a letter.","A letter was written by her.","She will write a letter.","She is writing a letter."], ans:1 },
+    { q:"Choose the correct article: '___ European city'", opts:["A","An","The","No article"], ans:0 },
+    { q:"The plural of 'criterion' is:", opts:["Criterions","Criterias","Criteria","Critereon"], ans:2 },
+    { q:"'Break the ice' means:", opts:["Destroy ice","Start a conversation","End an argument","Create problems"], ans:1 },
+    { q:"Which of the following is a conjunction?", opts:["Quickly","Beautiful","Although","Silence"], ans:2 },
+    { q:"Identify the noun in: 'The children played happily.'", opts:["played","happily","The","children"], ans:3 },
+    { q:"The correct spelling is:", opts:["Neccessary","Necessary","Necesary","Necessery"], ans:1 },
+    { q:"'She has been studying for two hours.' The tense is:", opts:["Simple present","Present perfect","Present perfect continuous","Past continuous"], ans:2 },
+    { q:"What does 'verbose' mean?", opts:["Silent","Using too many words","Very concise","Angry"], ans:1 },
+    { q:"Choose the correct preposition: 'She is good ___ mathematics.'", opts:["in","at","on","for"], ans:1 },
+    { q:"Which sentence is grammatically correct?", opts:["Neither of them are right.","Neither of them is right.","Neither of them was being right.","Neither them is right."], ans:1 },
+    { q:"The literary device used in 'The wind whispered through the trees' is:", opts:["Simile","Metaphor","Personification","Alliteration"], ans:2 },
+    { q:"'Loquacious' means:", opts:["Quiet","Talkative","Lazy","Intelligent"], ans:1 },
+    { q:"Choose the correct sentence:", opts:["I have less friends now.","I have fewer friends now.","I have lesser friends now.","I have few friends less now."], ans:1 },
+    { q:"The word 'benevolent' relates to:", opts:["Cruelty","Kindness","Sadness","Anger"], ans:1 },
+    { q:"In which sentence is the comma used correctly?", opts:["I went to the market, and I bought apples.","I, went to the market and I bought apples.","I went to, the market and I bought apples.","I went to the market and, I bought apples."], ans:0 },
+    { q:"Which is a compound sentence?", opts:["She ran fast.","Although she ran fast, she was late.","She ran fast and she caught the bus.","Running fast is healthy."], ans:2 },
+    { q:"'Ephemeral' means:", opts:["Lasting forever","Short-lived","Very old","Extremely large"], ans:1 },
+    { q:"Choose the correct form: 'If I ___ rich, I would travel.'", opts:["am","was","were","be"], ans:2 },
+    { q:"The word 'ameliorate' means:", opts:["To worsen","To improve","To destroy","To confuse"], ans:1 },
+    { q:"'She is taller than ___.' Fill in:", opts:["I","me","my","mine"], ans:0 }
+  ],
+  2: [ // PHYSICS
+    { q:"What is the SI unit of force?", opts:["Joule","Watt","Newton","Pascal"], ans:2 },
+    { q:"Newton's Third Law states:", opts:["F = ma","For every action there is equal and opposite reaction","Objects at rest remain at rest","Energy is conserved"], ans:1 },
+    { q:"The speed of light in vacuum is approximately:", opts:["3 x 10^6 m/s","3 x 10^7 m/s","3 x 10^8 m/s","3 x 10^9 m/s"], ans:2 },
+    { q:"Which type of lens converges light rays?", opts:["Concave lens","Convex lens","Plane mirror","Prism"], ans:1 },
+    { q:"The unit of electric current is:", opts:["Volt","Ohm","Watt","Ampere"], ans:3 },
+    { q:"What does a transformer do?", opts:["Converts AC to DC","Changes voltage of AC","Stores electrical energy","Measures current"], ans:1 },
+    { q:"The formula for kinetic energy is:", opts:["mgh","mv","(1/2)mv^2","Fd"], ans:2 },
+    { q:"Which waves do not require a medium to travel?", opts:["Sound waves","Water waves","Electromagnetic waves","Mechanical waves"], ans:2 },
+    { q:"The process of converting a solid directly into gas is called:", opts:["Evaporation","Condensation","Sublimation","Melting"], ans:2 },
+    { q:"Ohm's Law states that V =", opts:["I/R","IR","I+R","I-R"], ans:1 },
+    { q:"What is the unit of pressure?", opts:["Newton","Joule","Pascal","Watt"], ans:2 },
+    { q:"In which type of mirror is the image always virtual and erect?", opts:["Concave mirror","Plane mirror","Both concave and plane","Convex mirror"], ans:3 },
+    { q:"The phenomenon of bending of light around corners is called:", opts:["Reflection","Refraction","Diffraction","Dispersion"], ans:2 },
+    { q:"What is the frequency of AC supply in Pakistan?", opts:["50 Hz","60 Hz","100 Hz","25 Hz"], ans:0 },
+    { q:"The energy stored in a stretched spring is:", opts:["Kinetic energy","Thermal energy","Potential energy","Nuclear energy"], ans:2 },
+    { q:"Which law relates pressure and volume of gas at constant temperature?", opts:["Charles's Law","Boyle's Law","Newton's Law","Avogadro's Law"], ans:1 },
+    { q:"The SI unit of work is:", opts:["Newton","Pascal","Watt","Joule"], ans:3 },
+    { q:"What is the acceleration due to gravity on Earth's surface?", opts:["9.8 m/s^2","10.8 m/s^2","8.9 m/s^2","11 m/s^2"], ans:0 },
+    { q:"Total internal reflection occurs when light travels from:", opts:["Denser to rarer medium at critical angle","Rarer to denser medium","Vacuum to glass","Air to water"], ans:0 },
+    { q:"A body is in equilibrium when the net force acting on it is:", opts:["Maximum","Minimum","Zero","Infinite"], ans:2 },
+    { q:"The SI unit of power is:", opts:["Joule","Newton","Watt","Ampere"], ans:2 },
+    { q:"Which color of visible light has the highest frequency?", opts:["Red","Yellow","Green","Violet"], ans:3 },
+    { q:"The law of conservation of energy states that energy can be:", opts:["Created","Destroyed","Neither created nor destroyed","Both created and destroyed"], ans:2 },
+    { q:"Radioactivity was discovered by:", opts:["Marie Curie","Henri Becquerel","Ernest Rutherford","Albert Einstein"], ans:1 },
+    { q:"The phenomenon responsible for the blue color of the sky is:", opts:["Refraction","Reflection","Scattering","Diffraction"], ans:2 }
+  ],
+  3: [ // CHEMISTRY
+    { q:"What is the chemical formula of water?", opts:["HO","H2O","H2O2","HO2"], ans:1 },
+    { q:"The pH of a neutral solution is:", opts:["0","7","14","1"], ans:1 },
+    { q:"An atom that gains electrons becomes:", opts:["Neutral","A cation","An anion","A molecule"], ans:2 },
+    { q:"Which bond involves sharing of electron pairs?", opts:["Ionic bond","Metallic bond","Covalent bond","Hydrogen bond"], ans:2 },
+    { q:"The atomic number of Carbon is:", opts:["6","12","8","14"], ans:0 },
+    { q:"Avogadro's number is approximately:", opts:["6.022 x 10^23","6.022 x 10^22","3.011 x 10^23","9.033 x 10^23"], ans:0 },
+    { q:"Which gas is produced when zinc reacts with dilute H2SO4?", opts:["Oxygen","Carbon dioxide","Hydrogen","Nitrogen"], ans:2 },
+    { q:"The chemical symbol for Gold is:", opts:["Go","Gd","Au","Ag"], ans:2 },
+    { q:"Which of the following is a noble gas?", opts:["Oxygen","Chlorine","Argon","Nitrogen"], ans:2 },
+    { q:"The process of gaining oxygen or losing hydrogen is called:", opts:["Reduction","Oxidation","Neutralization","Hydration"], ans:1 },
+    { q:"What is the valency of Nitrogen?", opts:["1","2","3","4"], ans:2 },
+    { q:"NaCl is commonly known as:", opts:["Baking soda","Table salt","Vinegar","Bleaching powder"], ans:1 },
+    { q:"Which element has the highest electronegativity?", opts:["Oxygen","Chlorine","Fluorine","Nitrogen"], ans:2 },
+    { q:"Acids turn litmus paper:", opts:["Blue","Green","Red","Yellow"], ans:2 },
+    { q:"The molar mass of H2SO4 is:", opts:["96 g/mol","98 g/mol","100 g/mol","94 g/mol"], ans:1 },
+    { q:"Which law states that gases combine in simple whole-number ratios?", opts:["Avogadro's Law","Boyle's Law","Gay-Lussac's Law","Dalton's Law"], ans:2 },
+    { q:"Isotopes are atoms with the same atomic number but different:", opts:["Number of protons","Number of electrons","Mass number","Chemical properties"], ans:2 },
+    { q:"Which type of reaction releases heat?", opts:["Endothermic","Photochemical","Exothermic","Electrolytic"], ans:2 },
+    { q:"Rusting of iron is an example of:", opts:["Physical change","Reversible change","Oxidation","Reduction"], ans:2 },
+    { q:"The chemical formula of ammonia is:", opts:["NH2","N2H4","NH3","N2H2"], ans:2 },
+    { q:"The number of protons in an atom is called:", opts:["Mass number","Atomic number","Atomic mass","Valence number"], ans:1 },
+    { q:"Which acid is present in vinegar?", opts:["Hydrochloric acid","Sulfuric acid","Acetic acid","Nitric acid"], ans:2 },
+    { q:"The process of electrolysis requires:", opts:["Heat energy","Light energy","Electrical energy","Mechanical energy"], ans:2 },
+    { q:"Which element is a liquid at room temperature?", opts:["Sulfur","Iron","Mercury","Phosphorus"], ans:2 },
+    { q:"The chemical formula of glucose is:", opts:["C6H12O6","C12H22O11","C6H6","CH4"], ans:0 }
+  ]
+};
+
+// ===================== STATE =====================
+let currentSection = 0;
+let answers = { 0: {}, 1: {}, 2: {}, 3: {} };
+let timerInterval;
+let totalSeconds = 90 * 60;
+
+// ===================== BUILD QUESTIONS =====================
+function buildQuestions() {
+  for (let s = 0; s < 4; s++) {
+    const container = document.getElementById('questions-' + s);
+    container.innerHTML = '';
+    allQuestions[s].forEach((item, i) => {
+      const card = document.createElement('div');
+      card.className = 'q-card';
+      card.id = 'qcard-' + s + '-' + i;
+      card.innerHTML = `
+        <div class="q-num">Question ${i + 1} of 25</div>
+        <div class="q-text">${item.q}</div>
+        <div class="options">
+          ${item.opts.map((opt, oi) => `
+            <label class="opt-label" id="opt-${s}-${i}-${oi}" onclick="selectAnswer(${s},${i},${oi})">
+              <input type="radio" name="q-${s}-${i}" value="${oi}"/>
+              <div class="opt-dot"><div class="opt-dot-inner"></div></div>
+              <span>${opt}</span>
+            </label>
+          `).join('')}
+        </div>
+      `;
+      container.appendChild(card);
+    });
+  }
+}
+
+// ===================== SELECT ANSWER =====================
+function selectAnswer(section, qIndex, optIndex) {
+  answers[section][qIndex] = optIndex;
+  // Remove selected from all options in this question
+  for (let o = 0; o < 4; o++) {
+    const el = document.getElementById('opt-' + section + '-' + qIndex + '-' + o);
+    if (el) el.classList.remove('selected');
+  }
+  const selected = document.getElementById('opt-' + section + '-' + qIndex + '-' + optIndex);
+  if (selected) selected.classList.add('selected');
+
+  // Mark card as answered
+  const card = document.getElementById('qcard-' + section + '-' + qIndex);
+  if (card) card.classList.add('answered');
+
+  updateProgress();
+  updateBadge(section);
+}
+
+// ===================== PROGRESS =====================
+function updateProgress() {
+  let total = 0;
+  for (let s = 0; s < 4; s++) total += Object.keys(answers[s]).length;
+  const pct = (total / 100) * 100;
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-text').textContent = total + ' / 100 Answered';
+}
+
+function updateBadge(section) {
+  const cnt = Object.keys(answers[section]).length;
+  const badge = document.getElementById('badge-' + section);
+  badge.textContent = cnt + '/25';
+  if (cnt === 25) {
+    document.getElementById('tab-' + section).classList.add('complete');
+  }
+}
+
+// ===================== SWITCH SECTION =====================
+function switchSection(index) {
+  document.querySelectorAll('.section-content').forEach((el, i) => {
+    el.classList.toggle('active', i === index);
+  });
+  document.querySelectorAll('.tab-btn').forEach((el, i) => {
+    el.classList.toggle('active', i === index);
+  });
+  currentSection = index;
+  updateMainBtn();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function prevSection() {
+  if (currentSection > 0) switchSection(currentSection - 1);
+}
+
+function nextOrFinish() {
+  if (currentSection < 3) {
+    switchSection(currentSection + 1);
+  } else {
+    finishTest();
+  }
+}
+
+function updateMainBtn() {
+  const btn = document.getElementById('main-btn');
+  if (currentSection === 3) {
+    btn.textContent = 'Finish Test';
+    btn.className = 'nav-btn btn-finish';
+  } else {
+    btn.textContent = 'Next Section';
+    btn.className = 'nav-btn btn-next';
+  }
+}
+
+// ===================== TIMER =====================
+function startTimer() {
+  timerInterval = setInterval(() => {
+    totalSeconds--;
+    if (totalSeconds <= 0) {
+      clearInterval(timerInterval);
+      finishTest();
+      return;
+    }
+    const mins = Math.floor(totalSeconds / 60);
+    const secs = totalSeconds % 60;
+    document.getElementById('timer').textContent =
+      String(mins).padStart(2,'0') + ':' + String(secs).padStart(2,'0');
+
+    if (totalSeconds <= 300) {
+      document.getElementById('timer').style.color = '#e74c3c';
+    }
+  }, 1000);
+}
+
+// ===================== FINISH TEST =====================
+function finishTest() {
+  clearInterval(timerInterval);
+
+  let scores = [0, 0, 0, 0];
+  for (let s = 0; s < 4; s++) {
+    allQuestions[s].forEach((item, i) => {
+      if (answers[s][i] === item.ans) scores[s]++;
+    });
+  }
+
+  const total = scores.reduce((a, b) => a + b, 0);
+
+  document.getElementById('total-score').textContent = total;
+  document.getElementById('math-score').textContent = scores[0] + ' / 25';
+  document.getElementById('eng-score').textContent = scores[1] + ' / 25';
+  document.getElementById('phy-score').textContent = scores[2] + ' / 25';
+  document.getElementById('chem-score').textContent = scores[3] + ' / 25';
+
+  // Animate circle
+  const deg = (total / 100) * 360;
+  document.getElementById('score-circle').style.background =
+    `conic-gradient(#c9a84c ${deg}deg, rgba(201,168,76,0.1) ${deg}deg)`;
+
+  // Animate bars
+  setTimeout(() => {
+    document.getElementById('math-bar').style.width = (scores[0] / 25 * 100) + '%';
+    document.getElementById('eng-bar').style.width = (scores[1] / 25 * 100) + '%';
+    document.getElementById('phy-bar').style.width = (scores[2] / 25 * 100) + '%';
+    document.getElementById('chem-bar').style.width = (scores[3] / 25 * 100) + '%';
+  }, 300);
+
+  // Verdict
+  let title, msg;
+  if (total >= 80) {
+    title = "Outstanding Performance!";
+    msg = "Excellent result! You are very likely to secure admission at QUEST Nawabshah. Keep up the outstanding preparation!";
+  } else if (total >= 60) {
+    title = "Good Performance!";
+    msg = "Solid result! You have a good chance of admission. Review your weak areas and practice more MCQs to strengthen your score.";
+  } else if (total >= 40) {
+    title = "Average Performance";
+    msg = "You need more preparation. Focus on your weaker subjects and practice consistently. You can definitely improve with dedication!";
+  } else {
+    title = "Needs Improvement";
+    msg = "Keep practicing! Study your textbooks thoroughly, revise key concepts, and attempt more practice tests. You can do it!";
+  }
+
+  document.getElementById('verdict-title').textContent = title;
+  document.getElementById('verdict-msg').textContent = msg;
+
+  document.getElementById('result-screen').style.display = 'block';
+  document.getElementById('result-screen').scrollTop = 0;
+}
+
+// ===================== RESTART =====================
+function restartTest() {
+  answers = { 0: {}, 1: {}, 2: {}, 3: {} };
+  totalSeconds = 90 * 60;
+  document.getElementById('result-screen').style.display = 'none';
+  document.getElementById('timer').style.color = '';
+  document.getElementById('timer').textContent = '90:00';
+  buildQuestions();
+  for (let s = 0; s < 4; s++) {
+    document.getElementById('badge-' + s).textContent = '0/25';
+    document.getElementById('tab-' + s).classList.remove('complete');
+  }
+  updateProgress();
+  switchSection(0);
+  startTimer();
+}
+
+// ===================== INIT =====================
+buildQuestions();
+startTimer();
+updateMainBtn();
+</script>
+</body>
+</html>
